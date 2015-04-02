@@ -1,5 +1,8 @@
+import * as Utils from '../utils';
+
 class Grid {
-  constructor(width, height, cellsX, cellsY) {
+  constructor(game, width, height, cellsX, cellsY) {
+    this.game;
     this.width = width;
     this.height = height;
     this.cellsX = cellsX;
@@ -24,6 +27,13 @@ class Grid {
 
     ctx.strokeStyle = "black";
     ctx.stroke();
+  }
+
+  getRandomCell() {
+    return {
+      x: Utils.getRandomInt(0, this.cellsX - 1),
+      y: Utils.getRandomInt(0, this.cellsY - 1)
+    }
   }
 }
 
