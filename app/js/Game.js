@@ -1,24 +1,39 @@
 import _ from 'lodash';
+import * as Utils from 'utils';
 import * as Grid from 'classes/Grid';
 import * as Food from 'classes/Food';
 import * as Snake from 'classes/Snake';
 
 export default class {
-  constructor(canvas, cellsX = 20, cellsY = 20, playerCount = 4) {
+  constructor(canvas, cellsX = 20, cellsY = 20, playerCount = 4, updateInterval = 200, speedIncrease = 10) {
     this.canvas = canvas;
 
     this.grid = new Grid(this, canvas.width, canvas.height, cellsX, cellsY);
-    this.food = new Food(this, this.grid, 5000);
-    this.players = _.map(_.range(playerCount), idx => new Snake(this, this.grid, "Player " + idx, playerColors[idx], playerKeyMappings[idx], 100));
+    this.food = new Food(this, this.grid, 8000);
+    this.players = _.map(_.range(playerCount), idx => new Snake(this, this.grid, "Player " + idx, playerColors[idx], playerKeyMappings[idx]));
+
+    this.updateInterval = 200;
+    this.speedIncrease = speedIncrease;
   }
 
   start() {
     this.food.respawn();
-    this.players.forEach(p => p.startMoving());
+    this.updatePlayers();
+  }
+
+  increaseSpeed() {
+    this.updateInterval -= this.speedIncrease;
   }
 
   updateInput(event) {
     this.players.forEach(player => player.updateInput(event));
+  }
+
+  updatePlayers() {
+    this.players.forEach(player => player.update());
+    this.players.forEach(player => player.checkSnakeCollisions(this.players)); // check collisions after all positions have been updated
+
+    this.updateTimer = setTimeout(this.updatePlayers.bind(this), this.updateInterval);
   }
 
   draw(ctx) {

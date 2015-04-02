@@ -1,21 +1,16 @@
 import _ from 'lodash';
 
 export default class {
-  constructor(game, grid, name, color, keyMappings, moveInterval = 500, direction = "up") {
+  constructor(game, grid, name, color, keyMappings, direction = "up") {
     this.game = game;
     this.grid = grid;
     this.name = name;
     this.color = color;
-    this.moveInterval = moveInterval;
     this.direction = direction;
     this.keyMappings = keyMappings;
 
     this.positions = [grid.getRandomCell()];
     this.collectedFoodPos = [];
-  }
-
-  startMoving() {
-    this.updatePos();
   }
 
   updateInput(event) {
@@ -35,13 +30,9 @@ export default class {
 
   getHead() { return this.positions[0]; }
 
-  updatePos() {
+  update() {
     this.move(this.direction);
-
     this.checkFoodCollision();
-    this.checkSnakeCollision();
-
-    this.moveTimer = setTimeout(this.updatePos.bind(this), this.moveInterval);
   }
 
   checkFoodCollision() {
@@ -50,14 +41,15 @@ export default class {
         this.getHead().y === foodPos.y) {
       this.collectedFoodPos.push({x: foodPos.x, y: foodPos.y });
       this.game.food.respawn();
+
+      this.game.increaseSpeed();
     }
   }
 
-  checkSnakeCollision() {
-    //TODO: move collision detection to game, collisions should be checked after all players have updated their positions
+  checkSnakeCollisions(snakes) {
     const head = this.getHead();
 
-    this.game.players.forEach(player => {
+    snakes.forEach(player => {
       const tail = _.tail(player.positions);
       tail.forEach(elPos => {
         if (head.x === elPos.x && head.y === elPos.y) { // collision detected
