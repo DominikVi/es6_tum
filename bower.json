@@ -1,0 +1,19 @@
+{
+  "name": "es6_tum",
+  "version": "0.0.0",
+  "homepage": "https://github.com/DominikVi/es6_tum",
+  "authors": [
+    "Jonathan Kienzle <jonathan.kienzle@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.17"
+  }
+}
