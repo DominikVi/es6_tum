@@ -1,18 +1,15 @@
+import _ from 'lodash';
 import * as Grid from 'classes/Grid';
 import * as Food from 'classes/Food';
 import * as Snake from 'classes/Snake';
 
 export default class {
-  constructor(canvas, cellsX = 20, cellsY = 20, playerCount = 1) {
+  constructor(canvas, cellsX = 20, cellsY = 20, playerCount = 2) {
     this.canvas = canvas;
 
     this.grid = new Grid(this, canvas.width, canvas.height, cellsX, cellsY);
     this.food = new Food(this, this.grid, 5000);
-
-    this.players = [];
-    for (var i = 0; i < playerCount; i++) {
-      this.players.push(new Snake(this, this.grid, "#ff0000", playerKeyMappings[i], 100));
-    }
+    this.players = _.map(_.range(playerCount), idx => new Snake(this, this.grid, playerColors[idx], playerKeyMappings[idx], 100));
   }
 
   updateInput(event) {
@@ -47,4 +44,6 @@ const playerKeyMappings = [
     83: "down",  // s
     65: "left",  // a
   }
-]
+];
+
+const playerColors = ["#ff0000", "#00ff00", "#0000ff"];

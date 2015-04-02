@@ -24,14 +24,14 @@ export default class {
 
     const pixelPos = this.grid.cellPosToPixelPos(this.position);
 
+    ctx.fillStyle = 'green';
+    ctx.strokeStyle = 'green';
     ctx.beginPath();
     ctx.arc(pixelPos.x + offsetX,
             pixelPos.y + offsetY,
             Math.min(width, height) * 0.4, 0, 2 * Math.PI, false);
-
-    ctx.fillStyle = 'green';
+    ctx.closePath();
     ctx.fill();
-    ctx.strokeStyle = 'green';
     ctx.stroke();
   }
 }

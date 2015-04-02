@@ -102,8 +102,7 @@ export default class {
       const pixelPos = this.grid.cellPosToPixelPos(pos);
 
       ctx.fillStyle = this.color;
-      ctx.rect(pixelPos.x, pixelPos.y, this.grid.cellWidth, this.grid.cellHeight);
-      ctx.fill();
+      ctx.fillRect(pixelPos.x, pixelPos.y, this.grid.cellWidth, this.grid.cellHeight);
     });
   }
 }

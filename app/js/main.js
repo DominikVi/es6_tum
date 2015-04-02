@@ -1,5 +1,8 @@
 require.config({
-  baseUrl: '/js'
+  baseUrl: '/js',
+  paths: {
+    lodash: '/lib/lodash/lodash',
+  }
 });
 
 require(["Game"], function(Game) {
