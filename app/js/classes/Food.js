@@ -22,9 +22,11 @@ export default class {
     const offsetX = width * 0.5,
           offsetY = height * 0.5;
 
+    const pixelPos = this.grid.cellPosToPixelPos(this.position);
+
     ctx.beginPath();
-    ctx.arc(this.position.x * width + offsetX,
-            this.position.y * height + offsetY,
+    ctx.arc(pixelPos.x + offsetX,
+            pixelPos.y + offsetY,
             Math.min(width, height) * 0.4, 0, 2 * Math.PI, false);
 
     ctx.fillStyle = 'green';

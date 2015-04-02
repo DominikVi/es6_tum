@@ -35,6 +35,13 @@ class Grid {
       y: Utils.getRandomInt(0, this.cellsY - 1)
     }
   }
+
+  cellPosToPixelPos(cellPos) {
+    return {
+      x: cellPos.x * this.cellWidth,
+      y: cellPos.y * this.cellHeight
+    }
+  }
 }
 
 export default Grid;
