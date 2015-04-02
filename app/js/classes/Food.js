@@ -3,8 +3,6 @@ export default class {
     this.game;
     this.grid = grid;
     this.respawnInterval = respawnInterval;
-
-    this.respawn();
   }
 
   respawn() {

@@ -9,7 +9,12 @@ export default class {
 
     this.grid = new Grid(this, canvas.width, canvas.height, cellsX, cellsY);
     this.food = new Food(this, this.grid, 5000);
-    this.players = _.map(_.range(playerCount), idx => new Snake(this, this.grid, playerColors[idx], playerKeyMappings[idx], 100));
+    this.players = _.map(_.range(playerCount), idx => new Snake(this, this.grid, "Player " + idx, playerColors[idx], playerKeyMappings[idx], 100));
+  }
+
+  start() {
+    this.food.respawn();
+    this.players.forEach(p => p.startMoving());
   }
 
   updateInput(event) {

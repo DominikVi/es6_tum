@@ -13,6 +13,7 @@ require(["Game"], function(Game) {
   const context = canvas.getContext("2d");
 
   const game = new Game(canvas, 20, 20);
+  game.start();
 
   function gameLoop(timestamp) {
     game.draw(context);

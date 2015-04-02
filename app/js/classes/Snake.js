@@ -1,7 +1,10 @@
+import _ from 'lodash';
+
 export default class {
-  constructor(game, grid, color, keyMappings, moveInterval = 500, direction = "up") {
+  constructor(game, grid, name, color, keyMappings, moveInterval = 500, direction = "up") {
     this.game = game;
     this.grid = grid;
+    this.name = name;
     this.color = color;
     this.moveInterval = moveInterval;
     this.direction = direction;
@@ -9,7 +12,9 @@ export default class {
 
     this.positions = [grid.getRandomCell()];
     this.collectedFoodPos = [];
+  }
 
+  startMoving() {
     this.updatePos();
   }
 
@@ -34,6 +39,7 @@ export default class {
     this.move(this.direction);
 
     this.checkFoodCollision();
+    this.checkSnakeCollision();
 
     this.moveTimer = setTimeout(this.updatePos.bind(this), this.moveInterval);
   }
@@ -45,6 +51,20 @@ export default class {
       this.collectedFoodPos.push({x: foodPos.x, y: foodPos.y });
       this.game.food.respawn();
     }
+  }
+
+  checkSnakeCollision() {
+    const head = this.getHead();
+
+    this.game.players.forEach(player => {
+      const tail = _.tail(player.positions);
+      tail.forEach(elPos => {
+        if (head.x === elPos.x && head.y === elPos.y) { // collision detected
+          alert(`${this.name} collided with ${player.name}`);
+          //TODO: reset game
+        }
+      })
+    });
   }
 
   move(direction) {
