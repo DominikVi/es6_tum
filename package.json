@@ -1,0 +1,27 @@
+{
+  "name": "es6_tum",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DominikVi/es6_tum.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DominikVi/es6_tum/issues"
+  },
+  "homepage": "https://github.com/DominikVi/es6_tum",
+  "devDependencies": {
+    "bower": "^1.4.1",
+    "del": "^1.1.1",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^4.0.1",
+    "gulp-concat": "^2.5.2",
+    "gulp-sourcemaps": "^1.5.1"
+  }
+}
