@@ -10,7 +10,13 @@ export default class {
     this.food = new Food(this, this.grid, 5000);
 
     this.players = [];
-    this.players.push(new Snake(this, this.grid,  "#ff0000", 500));
+    for (var i = 0; i < playerCount; i++) {
+      this.players.push(new Snake(this, this.grid, "#ff0000", playerKeyMappings[i], 500));
+    }
+  }
+
+  updateInput(event) {
+    this.players.forEach(player => player.updateInput(event));
   }
 
   update(timestamp) {
@@ -29,3 +35,18 @@ export default class {
     });
   }
 }
+
+const playerKeyMappings = [
+  {
+    38: "up",    // up arrow
+    39: "right", // right arrow
+    40: "down",  // down arrow
+    37: "left",  // left arrow
+  },
+  {
+    87: "up",    // w
+    68: "right", // d
+    83: "down",  // s
+    65: "left",  // a
+  }
+]

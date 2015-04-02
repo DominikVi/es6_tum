@@ -1,20 +1,36 @@
 export default class {
-  constructor(game, grid, color, moveInterval = 500) {
+  constructor(game, grid, color, keyMappings, moveInterval = 500, direction = "up") {
     this.game = game;
     this.grid = grid;
     this.color = color;
     this.moveInterval = moveInterval;
+    this.direction = direction;
+    this.keyMappings = keyMappings;
 
     this.positions = [grid.getRandomCell()];
-    this.direction = "up";
 
-    this.update();
+    this.updatePos();
   }
 
-  update() {
+  updateInput(event) {
+    const moveDir = this.keyMappings[event.keyCode]; // get the move direction that is mapped to the pressed key
+    if (moveDir) {
+      // can't start moving in opposite direction
+      if (moveDir === "up"    && this.direction === "down" ||
+          moveDir === "right" && this.direction === "left" ||
+          moveDir === "down"  && this.direction === "up" ||
+          moveDir === "left"  && this.direction === "right") {
+        return;
+      }
+
+      this.direction = moveDir;
+    }
+  }
+
+  updatePos() {
     this.move(this.direction);
 
-    this.moveTimer = setTimeout(this.update.bind(this), this.moveInterval);
+    this.moveTimer = setTimeout(this.updatePos.bind(this), this.moveInterval);
   }
 
   move(direction) {

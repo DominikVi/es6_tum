@@ -15,6 +15,7 @@ require(["Game"], function(Game) {
     game.update(timestamp);
     game.draw(context);
 
+    window.addEventListener('keyup', game.updateInput.bind(game));
     window.requestAnimationFrame(gameLoop);
   }
 
