@@ -9,8 +9,8 @@ class Grid {
     this.cellHeight = Math.floor(height / cellsY);
   }
 
-  render(ctx) {
-// vertical lines
+  draw(ctx) {
+    // vertical lines
     for (var x = 0; x <= this.width; x += this.cellWidth) {
       ctx.moveTo(x, 0);
       ctx.lineTo(x, this.height);
