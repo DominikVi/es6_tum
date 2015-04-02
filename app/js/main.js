@@ -7,12 +7,12 @@ require.config({
 
 require(["Game"], function(Game) {
   const canvas = document.getElementsByTagName('canvas')[0];
-  canvas.width = 500;
-  canvas.height = 500;
+  canvas.width = 800;
+  canvas.height = 800;
 
   const context = canvas.getContext("2d");
 
-  const game = new Game(canvas, 20, 20);
+  const game = new Game(canvas, 40, 40);
   game.start();
 
   function gameLoop(timestamp) {

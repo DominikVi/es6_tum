@@ -54,6 +54,7 @@ export default class {
   }
 
   checkSnakeCollision() {
+    //TODO: move collision detection to game, collisions should be checked after all players have updated their positions
     const head = this.getHead();
 
     this.game.players.forEach(player => {
