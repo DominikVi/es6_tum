@@ -22,7 +22,7 @@ export default class {
   }
 
   increaseSpeed() {
-    this.updateInterval -= this.speedIncrease;
+    this.updateInterval = Math.max(1, this.updateInterval - this.speedIncrease);
   }
 
   updateInput(event) {
