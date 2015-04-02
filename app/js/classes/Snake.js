@@ -8,6 +8,7 @@ export default class {
     this.keyMappings = keyMappings;
 
     this.positions = [grid.getRandomCell()];
+    this.collectedFoodPos = [];
 
     this.updatePos();
   }
@@ -27,10 +28,23 @@ export default class {
     }
   }
 
+  getHead() { return this.positions[0]; }
+
   updatePos() {
     this.move(this.direction);
 
+    this.checkFoodCollision();
+
     this.moveTimer = setTimeout(this.updatePos.bind(this), this.moveInterval);
+  }
+
+  checkFoodCollision() {
+    const foodPos = this.game.food.position;
+    if (this.getHead().x === foodPos.x &&
+        this.getHead().y === foodPos.y) {
+      this.collectedFoodPos.push({x: foodPos.x, y: foodPos.y });
+      this.game.food.respawn();
+    }
   }
 
   move(direction) {
@@ -39,47 +53,56 @@ export default class {
 
     switch(direction) {
       case "up":
-        if (this.positions[0].y === 0) { // will move into wall
-          this.positions.unshift({ x: this.positions[0].x, y: this.grid.cellsY - 1 }) // move to bottom wall
+        if (this.getHead().y === 0) { // will move into wall
+          this.positions.unshift({ x: this.getHead().x, y: this.grid.cellsY - 1 }) // move to bottom wall
         } else {
-          this.positions.unshift({ x: this.positions[0].x, y: this.positions[0].y - 1 }) // move up
+          this.positions.unshift({ x: this.getHead().x, y: this.getHead().y - 1 }) // move up
         }
         break;
 
       case "right":
-        if (this.positions[0].x === this.grid.cellsX - 1) { // will move into wall
-          this.positions.unshift({ x: 0, y: this.positions[0].y }) // move to left wall
+        if (this.getHead().x === this.grid.cellsX - 1) { // will move into wall
+          this.positions.unshift({ x: 0, y: this.getHead().y }) // move to left wall
         } else {
-          this.positions.unshift({ x: this.positions[0].x + 1, y: this.positions[0].y }) // move right
+          this.positions.unshift({ x: this.getHead().x + 1, y: this.getHead().y }) // move right
         }
         break;
 
       case "down":
-        if (this.positions[0].y === this.grid.cellsY) { // will move into wall
-          this.positions.unshift({ x: this.positions[0].x, y: 0 }) // move to top wall
+        if (this.getHead().y === this.grid.cellsY) { // will move into wall
+          this.positions.unshift({ x: this.getHead().x, y: 0 }) // move to top wall
         } else {
-          this.positions.unshift({ x: this.positions[0].x, y: this.positions[0].y + 1 }) // move down
+          this.positions.unshift({ x: this.getHead().x, y: this.getHead().y + 1 }) // move down
         }
         break;
 
       case "left":
-        if (this.positions[0].x === 0) { // will move into wall
-          this.positions.unshift({ x: this.grid.cellsX - 1, y: this.positions[0].y }) // move to left wall
+        if (this.getHead().x === 0) { // will move into wall
+          this.positions.unshift({ x: this.grid.cellsX - 1, y: this.getHead().y }) // move to left wall
         } else {
-          this.positions.unshift({ x: this.positions[0].x - 1, y: this.positions[0].y }) // move left
+          this.positions.unshift({ x: this.getHead().x - 1, y: this.getHead().y }) // move left
         }
         break;
     }
 
-    this.positions.pop(); // remove last element of the snake
+    // only remove last element if no new food has been collected at its position
+    const lastPos = this.positions[this.positions.length - 1];
+    const lastFoodPos = this.collectedFoodPos[this.collectedFoodPos.length -1];
+    if (lastFoodPos &&
+        lastPos.x === lastFoodPos.x &&
+        lastPos.y === lastFoodPos.y) {
+      this.collectedFoodPos.pop();
+    } else {
+      this.positions.pop();
+    }
   }
 
   draw(ctx) {
     this.positions.forEach(pos => {
       const pixelPos = this.grid.cellPosToPixelPos(pos);
 
-      ctx.rect(pixelPos.x, pixelPos.y, this.grid.cellWidth, this.grid.cellHeight);
       ctx.fillStyle = this.color;
+      ctx.rect(pixelPos.x, pixelPos.y, this.grid.cellWidth, this.grid.cellHeight);
       ctx.fill();
     });
   }

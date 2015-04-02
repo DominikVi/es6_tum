@@ -11,16 +11,12 @@ export default class {
 
     this.players = [];
     for (var i = 0; i < playerCount; i++) {
-      this.players.push(new Snake(this, this.grid, "#ff0000", playerKeyMappings[i], 500));
+      this.players.push(new Snake(this, this.grid, "#ff0000", playerKeyMappings[i], 100));
     }
   }
 
   updateInput(event) {
     this.players.forEach(player => player.updateInput(event));
-  }
-
-  update(timestamp) {
-
   }
 
   draw(ctx) {
@@ -36,6 +32,8 @@ export default class {
   }
 }
 
+// key mappings for all players
+// map keyCodes to move directions
 const playerKeyMappings = [
   {
     38: "up",    // up arrow

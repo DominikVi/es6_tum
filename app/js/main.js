@@ -12,7 +12,6 @@ require(["Game"], function(Game) {
   const game = new Game(canvas, 20, 20);
 
   function gameLoop(timestamp) {
-    game.update(timestamp);
     game.draw(context);
 
     window.addEventListener('keyup', game.updateInput.bind(game));
