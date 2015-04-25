@@ -2,6 +2,7 @@ import _ from 'lodash';
 import * as Utils from 'utils';
 import * as Grid from 'classes/Grid';
 import * as Food from 'classes/Food';
+import * as FoodRandom from 'classes/FoodRandom';
 import * as Snake from 'classes/Snake';
 
 export default class {
@@ -9,7 +10,8 @@ export default class {
     this.canvas = canvas;
 
     this.grid = new Grid(this, canvas.width, canvas.height, cellsX, cellsY);
-    this.food = new Food(this, this.grid, 8000);
+    this.food = new Food(this, this.grid, 'green', 8000);
+    this.foodRandom = new FoodRandom(this, this.grid, 'blue', 0.5, 4000);
     this.players = _.map(_.range(playerCount), idx => new Snake(this, this.grid, "Player " + idx, playerColors[idx], playerKeyMappings[idx]));
 
     this.updateInterval = 200;
@@ -18,6 +20,7 @@ export default class {
 
   start() {
     this.food.respawn();
+    this.foodRandom.respawn();
     this.updatePlayers();
   }
 
@@ -42,6 +45,7 @@ export default class {
 
     this.grid.draw(ctx);
     this.food.draw(ctx);
+    this.foodRandom.draw(ctx);
 
     this.players.forEach(player => {
       player.draw(ctx);

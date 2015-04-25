@@ -7,8 +7,8 @@ require.config({
 
 require(["Game"], function(Game) {
   const canvas = document.getElementsByTagName('canvas')[0];
-  canvas.width = 800;
-  canvas.height = 800;
+  canvas.width = 500;
+  canvas.height = 500;
 
   const context = canvas.getContext("2d");
 

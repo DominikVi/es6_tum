@@ -32,15 +32,16 @@ export default class Snake {
 
   update() {
     this.move(this.direction);
-    this.checkFoodCollision();
+    this.checkFoodCollision(this.game.food);
+    this.checkFoodCollision(this.game.foodRandom);
   }
 
-  checkFoodCollision() {
-    const foodPos = this.game.food.position;
+  checkFoodCollision(food) {
+    const foodPos = food.position;
     if (this.getHead().x === foodPos.x &&
         this.getHead().y === foodPos.y) {
       this.collectedFoodPos.push({x: foodPos.x, y: foodPos.y });
-      this.game.food.respawn();
+      food.respawn();
 
       this.game.increaseSpeed();
     }
