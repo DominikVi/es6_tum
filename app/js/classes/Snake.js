@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export default class {
+export default class Snake {
   constructor(game, grid, name, color, keyMappings, direction = "up") {
     this.game = game;
     this.grid = grid;
@@ -56,7 +56,7 @@ export default class {
           alert(`${this.name} collided with ${player.name}`);
           //TODO: reset game
         }
-      })
+      });
     });
   }
 
@@ -67,33 +67,33 @@ export default class {
     switch(direction) {
       case "up":
         if (this.getHead().y === 0) { // will move into wall
-          this.positions.unshift({ x: this.getHead().x, y: this.grid.cellsY - 1 }) // move to bottom wall
+          this.positions.unshift({ x: this.getHead().x, y: this.grid.cellsY - 1 }); // move to bottom wall
         } else {
-          this.positions.unshift({ x: this.getHead().x, y: this.getHead().y - 1 }) // move up
+          this.positions.unshift({ x: this.getHead().x, y: this.getHead().y - 1 }); // move up
         }
         break;
 
       case "right":
         if (this.getHead().x === this.grid.cellsX - 1) { // will move into wall
-          this.positions.unshift({ x: 0, y: this.getHead().y }) // move to left wall
+          this.positions.unshift({ x: 0, y: this.getHead().y }); // move to left wall
         } else {
-          this.positions.unshift({ x: this.getHead().x + 1, y: this.getHead().y }) // move right
+          this.positions.unshift({ x: this.getHead().x + 1, y: this.getHead().y }); // move right
         }
         break;
 
       case "down":
         if (this.getHead().y === this.grid.cellsY) { // will move into wall
-          this.positions.unshift({ x: this.getHead().x, y: 0 }) // move to top wall
+          this.positions.unshift({ x: this.getHead().x, y: 0 }); // move to top wall
         } else {
-          this.positions.unshift({ x: this.getHead().x, y: this.getHead().y + 1 }) // move down
+          this.positions.unshift({ x: this.getHead().x, y: this.getHead().y + 1 }); // move down
         }
         break;
 
       case "left":
         if (this.getHead().x === 0) { // will move into wall
-          this.positions.unshift({ x: this.grid.cellsX - 1, y: this.getHead().y }) // move to left wall
+          this.positions.unshift({ x: this.grid.cellsX - 1, y: this.getHead().y }); // move to left wall
         } else {
-          this.positions.unshift({ x: this.getHead().x - 1, y: this.getHead().y }) // move left
+          this.positions.unshift({ x: this.getHead().x - 1, y: this.getHead().y }); // move left
         }
         break;
     }

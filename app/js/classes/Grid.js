@@ -2,7 +2,7 @@ import * as Utils from '../utils';
 
 class Grid {
   constructor(game, width, height, cellsX, cellsY) {
-    this.game;
+    this.game = game;
     this.width = width;
     this.height = height;
     this.cellsX = cellsX;
@@ -33,14 +33,14 @@ class Grid {
     return {
       x: Utils.getRandomInt(0, this.cellsX - 1),
       y: Utils.getRandomInt(0, this.cellsY - 1)
-    }
+    };
   }
 
   cellPosToPixelPos(cellPos) {
     return {
       x: cellPos.x * this.cellWidth,
       y: cellPos.y * this.cellHeight
-    }
+    };
   }
 }
 

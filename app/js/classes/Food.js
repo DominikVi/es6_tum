@@ -1,6 +1,6 @@
-export default class {
+export default class Food {
   constructor(game, grid, respawnInterval = 5000) {
-    this.game;
+    this.game = game;
     this.grid = grid;
     this.respawnInterval = respawnInterval;
   }
@@ -10,7 +10,7 @@ export default class {
 
     // respawn can be triggered from outside (e.g. food was eaten) => reset timer in this case
     if (this.respawnTimer) {
-      clearTimeout(this.respawnTimer)
+      clearTimeout(this.respawnTimer);
     }
     this.respawnTimer = setTimeout(this.respawn.bind(this), this.respawnInterval);
   }
