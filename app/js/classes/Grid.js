@@ -1,4 +1,4 @@
-import * as Utils from '../utils';
+import { getRandomInt } from '../utils';
 
 class Grid {
   constructor(game, width, height, cellsX, cellsY) {
@@ -31,8 +31,8 @@ class Grid {
 
   getRandomCell() {
     return {
-      x: Utils.getRandomInt(0, this.cellsX - 1),
-      y: Utils.getRandomInt(0, this.cellsY - 1)
+      x: getRandomInt(0, this.cellsX - 1),
+      y: getRandomInt(0, this.cellsY - 1)
     };
   }
 

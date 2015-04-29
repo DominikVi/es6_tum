@@ -1,4 +1,4 @@
-import * as Food from './Food';
+import Food from './Food';
 
 export default class FoodRandom extends Food {
   constructor(game, grid, color, respawnProbability, respawnInterval = 5000) {

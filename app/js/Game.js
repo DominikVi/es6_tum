@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import * as Utils from 'utils';
-import * as Grid from 'classes/Grid';
-import * as Food from 'classes/Food';
-import * as FoodRandom from 'classes/FoodRandom';
-import * as Snake from 'classes/Snake';
+import { getRandomInt } from 'utils';
+import Grid from 'classes/Grid';
+import Food from 'classes/Food';
+import FoodRandom from 'classes/FoodRandom';
+import Snake from 'classes/Snake';
 
 export default class {
   constructor(canvas, cellsX = 20, cellsY = 20, playerCount = 4, updateInterval = 200, speedIncrease = 10) {
