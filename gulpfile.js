@@ -24,6 +24,12 @@ gulp.task('html', function () {
     .pipe(gulp.dest('dist'));
 });
 
+// Css
+gulp.task('css', function () {
+  return gulp.src('app/**/*.css')
+    .pipe(gulp.dest('dist'));
+});
+
 // Bower
 gulp.task('bower', function() {
   return bower()
@@ -32,12 +38,12 @@ gulp.task('bower', function() {
 
 // Clean
 gulp.task('clean', function(cb) {
-    del(['dist/js', '*.html'], cb);
+    del(['dist/js', '*.html', '*.css'], cb);
 });
 
 // Default task
 gulp.task('default', ['clean'], function() {
-  gulp.start('scripts', 'html', 'bower');
+  gulp.start('scripts', 'html', 'css', 'bower');
 });
 
 // Watch
@@ -45,6 +51,9 @@ gulp.task('watch', function() {
 
   // Watch .html files
   gulp.watch('app/**/*.html', ['html']);
+
+  // Watch .css files
+  gulp.watch('app/**/*.css', ['css']);
 
   // Watch .js files
   gulp.watch('app/js/**/*.js', ['scripts']);

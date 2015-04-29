@@ -10,8 +10,8 @@ export default class {
     this.canvas = canvas;
 
     this.grid = new Grid(this, canvas.width, canvas.height, cellsX, cellsY);
-    this.food = new Food(this, this.grid, 'green', 8000);
-    this.foodRandom = new FoodRandom(this, this.grid, 'blue', 0.5, 4000);
+    this.food = new Food(this, this.grid, '#0BB200', 8000);
+    this.foodRandom = new FoodRandom(this, this.grid, '#B20E09', 0.5, 4000);
     this.players = _.map(_.range(playerCount), idx => new Snake(this, this.grid, "Player " + idx, playerColors[idx], playerKeyMappings[idx]));
 
     this.updateInterval = 200;
@@ -82,4 +82,4 @@ const playerKeyMappings = [
   }
 ];
 
-const playerColors = ["#ff0000", "#00ff00", "#0000ff", "#00ffff"];
+const playerColors = ["#f0db4f", "#19EDFF", "#CC147F", "#0048FF"];
