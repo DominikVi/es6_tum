@@ -113,10 +113,10 @@ export default class Snake {
 
   draw(ctx) {
     this.positions.forEach(pos => {
-      const pixelPos = this.grid.cellPosToPixelPos(pos);
+      const { pixPosX: x, pixPosY: y } = this.grid.cellPosToPixelPos(pos);
 
       ctx.fillStyle = this.color;
-      ctx.fillRect(pixelPos.x, pixelPos.y, this.grid.cellWidth, this.grid.cellHeight);
+      ctx.fillRect(pixPosX, pixPosY, this.grid.cellWidth, this.grid.cellHeight);
     });
   }
 }
