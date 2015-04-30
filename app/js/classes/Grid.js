@@ -25,7 +25,7 @@ class Grid {
       ctx.lineTo(this.width, y);
     }
 
-    ctx.strokeStyle = "#969696";
+    ctx.strokeStyle = "#434343";
     ctx.stroke();
   }
 
